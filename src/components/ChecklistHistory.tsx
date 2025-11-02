@@ -40,8 +40,8 @@ export function ChecklistHistory({ lists }: ChecklistHistoryProps) {
             <tr>
               <th>Date/Time</th>
               <th>Location</th>
-              <th>Species</th>
-              <th>Actions</th>
+              <th>#</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
