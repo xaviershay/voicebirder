@@ -20,7 +20,6 @@ export interface VoiceInference {
 export interface UseVoiceCommandsReturn {
   isWakeWordActive: boolean;
   isListeningForCommand: boolean;
-  lastInference: VoiceInference | null;
   error: string | null;
   startVoiceCommands: () => Promise<void>;
   stopVoiceCommands: () => void;
@@ -37,13 +36,11 @@ export function useVoiceCommands(
   onBirdDetected?: (inference: VoiceInference) => void
 ): UseVoiceCommandsReturn {
   const [voiceState, setVoiceState] = useState<VoiceState>('IDLE');
-  const [lastInference, setLastInference] = useState<VoiceInference | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [accessKey, setAccessKey] = useState<string>('');
 
   // Refs to track IDs and prevent duplicate processing
   const lastWakeWordIdRef = useRef<string | null>(null);
-  const lastInferenceIdRef = useRef<string | null>(null);
   const listeningTimeoutRef = useRef<number | null>(null);
 
   // Load access key
@@ -91,41 +88,27 @@ export function useVoiceCommands(
     setVoiceState('WAITING_FOR_WAKEWORD');
 
     // Start Porcupine if not already listening
-    if (isPorcupineLoaded && !isPorcupineListening) {
-      console.log('[Porcupine] Starting...');
-      startPorcupine();
-    }
+    //if (isPorcupineLoaded && !isPorcupineListening) {
+    //  console.log('[Porcupine] Starting...');
+    //  startPorcupine();
+    //}
   }, [isPorcupineLoaded, isPorcupineListening, startPorcupine, clearListeningTimeout]);
 
-  // Start Rhino listening
-  const startRhinoListening = useCallback(() => {
-    console.log('[Voice] Entering LISTENING_FOR_INTENT state');
-    setVoiceState('LISTENING_FOR_INTENT');
-
-    // Stop Porcupine while Rhino is listening
-    if (isPorcupineListening) {
-      console.log('[Porcupine] Stopping...');
-      stopPorcupine();
-    }
-
-    // Start Rhino processing
-    if (isRhinoLoaded) {
-      console.log('[Rhino] Starting processing...');
-      processRhino();
-
-      // Set 5 second timeout
-      clearListeningTimeout();
-      listeningTimeoutRef.current = setTimeout(() => {
-        console.log('[Rhino] Timeout - no intent detected after 5 seconds');
-        setLastInference({ isUnderstood: false });
-        resetToWaitingForWakeWord();
-      }, 5000);
-    }
-  }, [isPorcupineListening, isRhinoLoaded, stopPorcupine, processRhino, clearListeningTimeout, resetToWaitingForWakeWord]);
 
   // Handle wake word detection
   useEffect(() => {
     if (wakeWordDetection !== null && wakeWordDetection.label === 'Record') {
+      console.log("[Porcupine] Wake word detected!");
+      setVoiceState('LISTENING_FOR_INTENT');
+      processRhino();
+
+      clearListeningTimeout();
+      listeningTimeoutRef.current = setTimeout(() => {
+        console.log('[Rhino] Timeout - no intent detected');
+        setLastInference({ isUnderstood: false });
+        resetToWaitingForWakeWord();
+      }, 5000);
+      /*
       // Ignore wake words when in IDLE state
       if (voiceState === 'IDLE') {
         return;
@@ -149,9 +132,43 @@ export function useVoiceCommands(
         console.log('[Voice] Wake word detected while listening - resetting Rhino');
         startRhinoListening();
       }
+        */
     }
-  }, [wakeWordDetection, voiceState, startRhinoListening]);
+  }, [wakeWordDetection]);
 
+  useEffect(() => {
+    if (inference !== null) {
+      clearListeningTimeout();
+      setVoiceState('WAITING_FOR_WAKEWORD');
+      console.log(inference);
+      if (inference.isUnderstood && inference.intent === 'addBird') {
+        const rhinoBirdName = inference.slots?.birdName;
+        const count = inference.slots?.count ? parseInt(inference.slots.count, 10) : 1;
+
+        if (rhinoBirdName) {
+          // Map Rhino name back to eBird data
+          const birdData = findBirdByRhinoName(birdMapping, rhinoBirdName);
+
+          const voiceInference: VoiceInference = {
+            isUnderstood: true,
+            birdName: rhinoBirdName,
+            count: isNaN(count) ? 1 : count,
+            ebirdCommonName: birdData?.ebirdCommonName,
+            scientificName: birdData?.scientificName,
+            speciesCode: birdData?.speciesCode,
+          };
+
+          // Notify callback exactly once
+          if (onBirdDetected) {
+            onBirdDetected(voiceInference);
+          }
+        }
+      } else {
+        //setLastInference({ isUnderstood: false });
+      }
+    }
+  }, [inference]);
+  /*
   // Handle Rhino inference
   useEffect(() => {
     if (inference !== null && voiceState === 'LISTENING_FOR_INTENT') {
@@ -199,6 +216,7 @@ export function useVoiceCommands(
       resetToWaitingForWakeWord();
     }
   }, [inference, voiceState, birdMapping, onBirdDetected, clearListeningTimeout, resetToWaitingForWakeWord]);
+*/
 
   // Handle errors
   useEffect(() => {
@@ -227,9 +245,7 @@ export function useVoiceCommands(
 
       // Reset all speech-related state
       setError(null);
-      setLastInference(null);
       lastWakeWordIdRef.current = null;
-      lastInferenceIdRef.current = null;
       clearListeningTimeout();
 
       // Initialize Porcupine (wake word)
@@ -257,7 +273,7 @@ export function useVoiceCommands(
       setError(`Failed to start: ${err instanceof Error ? err.message : String(err)}`);
       setVoiceState('IDLE');
     }
-  }, [accessKey, initPorcupine, initRhino, startPorcupine, clearListeningTimeout]);
+  }, [accessKey, initPorcupine, initRhino, startPorcupine, clearListeningTimeout, isRhinoLoaded]);
 
   // Stop voice commands
   const stopVoiceCommands = useCallback(() => {
@@ -266,8 +282,6 @@ export function useVoiceCommands(
     // Reset all speech-related state
     clearListeningTimeout();
     lastWakeWordIdRef.current = null;
-    lastInferenceIdRef.current = null;
-    setLastInference(null);
 
     // Stop and release both engines
     if (isPorcupineListening) {
@@ -284,7 +298,6 @@ export function useVoiceCommands(
   return {
     isWakeWordActive: voiceState !== 'IDLE',
     isListeningForCommand: voiceState === 'LISTENING_FOR_INTENT',
-    lastInference,
     error,
     startVoiceCommands,
     stopVoiceCommands,

@@ -39,7 +39,7 @@ function App() {
   // Voice command callback
   const handleBirdDetected = useCallback(
     (inference: VoiceInference) => {
-      if (!currentList || !inference.ebirdCommonName) return;
+      if (!inference.ebirdCommonName) return;
 
       console.log('Voice detected bird:', inference);
 
@@ -51,7 +51,7 @@ function App() {
         inference.scientificName
       );
     },
-    [currentList, addSighting]
+    [addSighting]
   );
 
   // Voice commands hook
