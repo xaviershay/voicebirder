@@ -1,0 +1,289 @@
+.sightings-table {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.sightings-table__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sightings-table__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: #111827;
+}
+
+.add-sighting-form {
+  padding: 1rem 1.5rem;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.add-sighting-form__inputs {
+  flex: 1;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.form-input--inline {
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-input--count {
+  flex: 0 0 80px;
+  min-width: 80px;
+}
+
+.sightings-table__empty {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.sightings-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.sighting-row {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.sighting-row:hover {
+  background: #f9fafb;
+}
+
+.sighting-row:last-child {
+  border-bottom: none;
+}
+
+.sighting-row__main {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 1rem;
+}
+
+.sighting-row__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sighting-row__name {
+  font-weight: 600;
+  color: #111827;
+}
+
+.sighting-row__scientific {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #6b7280;
+}
+
+.sighting-row__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sighting-row__time {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.sighting-row__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.count-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f3f4f6;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+}
+
+.count-control__btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 0.25rem;
+  border: none;
+  background: white;
+  color: #374151;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.count-control__btn:hover {
+  background: #667eea;
+  color: white;
+}
+
+.count-control__value {
+  min-width: 32px;
+  text-align: center;
+  font-weight: 600;
+  color: #111827;
+}
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 0.25rem;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.btn-icon--delete:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+@media (max-width: 768px) {
+  .sightings-table__header {
+    padding: 0.75rem 1rem;
+  }
+
+  .sightings-table__title {
+    font-size: 1.125rem;
+  }
+
+  .add-sighting-form {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+  }
+
+  .add-sighting-form__inputs {
+    width: 100%;
+  }
+
+  .form-input--inline {
+    min-width: 100%;
+  }
+
+  .form-input--count {
+    flex: 1;
+  }
+
+  .sighting-row {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .sighting-row__main {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .sighting-row__actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .sightings-table {
+    background: #1f2937;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .sightings-table__header {
+    border-bottom-color: #374151;
+  }
+
+  .sightings-table__title {
+    color: #f9fafb;
+  }
+
+  .add-sighting-form {
+    background: #111827;
+    border-bottom-color: #374151;
+  }
+
+  .sightings-table__empty {
+    color: #9ca3af;
+  }
+
+  .sighting-row {
+    border-bottom-color: #374151;
+  }
+
+  .sighting-row:hover {
+    background: #111827;
+  }
+
+  .sighting-row__name {
+    color: #f9fafb;
+  }
+
+  .sighting-row__scientific,
+  .sighting-row__time {
+    color: #9ca3af;
+  }
+
+  .count-control {
+    background: #374151;
+  }
+
+  .count-control__btn {
+    background: #1f2937;
+    color: #e5e7eb;
+  }
+
+  .count-control__btn:hover {
+    background: #667eea;
+    color: white;
+  }
+
+  .count-control__value {
+    color: #f9fafb;
+  }
+
+  .btn-icon {
+    color: #9ca3af;
+  }
+
+  .btn-icon--delete:hover {
+    background: #7f1d1d;
+    color: #fca5a5;
+  }
+}

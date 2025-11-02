@@ -1,0 +1,176 @@
+.welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 5rem);
+  padding: 2rem 1rem;
+}
+
+.welcome__content {
+  max-width: 500px;
+  width: 100%;
+}
+
+.welcome__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.welcome__description {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.welcome__form {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  font-family: inherit;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+}
+
+.btn--large {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.125rem;
+}
+
+.welcome__info {
+  background: #f9fafb;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.info__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #374151;
+}
+
+.info__list {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #6b7280;
+}
+
+.info__list li {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .welcome {
+    min-height: calc(100vh - 4rem);
+    padding: 1rem;
+  }
+
+  .welcome__title {
+    font-size: 1.5rem;
+  }
+
+  .welcome__form {
+    padding: 1.5rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .welcome__description {
+    color: #9ca3af;
+  }
+
+  .welcome__form {
+    background: #1f2937;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .form-label {
+    color: #e5e7eb;
+  }
+
+  .form-input,
+  .form-select {
+    background: #111827;
+    border-color: #374151;
+    color: #f9fafb;
+  }
+
+  .form-input:focus,
+  .form-select:focus {
+    border-color: #667eea;
+  }
+
+  .welcome__info {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .info__title {
+    color: #e5e7eb;
+  }
+
+  .info__list {
+    color: #9ca3af;
+  }
+}
