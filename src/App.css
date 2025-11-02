@@ -11,6 +11,31 @@
   flex-direction: column;
 }
 
+.app__error,
+.app__loading {
+  padding: 2rem;
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 500px;
+}
+
+.app__error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.5rem;
+  color: #991b1b;
+}
+
+.app__error p {
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.app__loading {
+  color: #6b7280;
+  font-size: 1.125rem;
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .app {
@@ -21,5 +46,15 @@
 @media (prefers-color-scheme: dark) {
   .app {
     background: #111827;
+  }
+
+  .app__error {
+    background: #7f1d1d;
+    border-color: #991b1b;
+    color: #fecaca;
+  }
+
+  .app__loading {
+    color: #9ca3af;
   }
 }

@@ -4,18 +4,22 @@
 
 import { useState } from 'react';
 import { format } from 'date-fns';
-import type { BirdSighting } from '../types';
+import type { BirdSighting, BirdReference } from '../types';
+import { BirdAutocomplete } from './BirdAutocomplete';
+import { findBirdByName } from '../services/ebirdApi';
 import './SightingsTable.css';
 
 interface SightingsTableProps {
   sightings: BirdSighting[];
-  onAddSighting: (commonName: string, count: number) => void;
+  birds: BirdReference[];
+  onAddSighting: (commonName: string, count: number, speciesCode?: string, scientificName?: string) => void;
   onRemoveSighting: (sightingId: string) => void;
   onUpdateSighting: (sightingId: string, count: number) => void;
 }
 
 export function SightingsTable({
   sightings,
+  birds,
   onAddSighting,
   onRemoveSighting,
   onUpdateSighting,
@@ -38,10 +42,22 @@ export function SightingsTable({
       return;
     }
 
-    onAddSighting(birdName.trim(), countNum);
+    // Try to find matching bird for species code and scientific name
+    const matchingBird = findBirdByName(birds, birdName.trim());
+
+    onAddSighting(
+      birdName.trim(),
+      countNum,
+      matchingBird?.speciesCode,
+      matchingBird?.scientificName
+    );
     setBirdName('');
     setCount('1');
     setIsAdding(false);
+  };
+
+  const handleBirdSelect = (bird: BirdReference) => {
+    setBirdName(bird.commonName);
   };
 
   const sortedSightings = [...sightings].sort(
@@ -65,12 +81,11 @@ export function SightingsTable({
       {isAdding && (
         <form className="add-sighting-form" onSubmit={handleAdd}>
           <div className="add-sighting-form__inputs">
-            <input
-              type="text"
-              className="form-input form-input--inline"
-              placeholder="Bird name (e.g., Australian Magpie)"
+            <BirdAutocomplete
+              birds={birds}
               value={birdName}
-              onChange={(e) => setBirdName(e.target.value)}
+              onChange={setBirdName}
+              onSelect={handleBirdSelect}
               autoFocus
             />
             <input

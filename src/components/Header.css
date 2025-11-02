@@ -14,9 +14,39 @@
   margin: 0;
 }
 
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .header__status {
   display: flex;
   gap: 0.5rem;
+}
+
+.header__settings-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 0.375rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.header__settings-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(30deg);
+}
+
+.header__settings-btn:active {
+  transform: rotate(30deg) scale(0.95);
 }
 
 .status-indicator {
