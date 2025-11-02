@@ -73,13 +73,22 @@ export async function fetchBirdSpecies(apiKey: string, forceRefresh = false): Pr
     // Convert to our BirdReference format
     const birds: BirdReference[] = taxonomy
       .filter(bird => bird.category === 'species') // Only species, not subspecies/hybrids
-      .map(bird => ({
-        commonName: bird.comName,
-        scientificName: bird.sciName,
-        speciesCode: bird.speciesCode,
-        category: bird.category,
-        taxonOrder: bird.taxonOrder,
-      }))
+      .map(bird => {
+        // Parse genus and species from scientific name
+        const sciNameParts = bird.sciName.split(' ');
+        const genus = sciNameParts[0] || '';
+        const species = sciNameParts[1] || '';
+
+        return {
+          commonName: bird.comName,
+          scientificName: bird.sciName,
+          genus,
+          species,
+          speciesCode: bird.speciesCode,
+          category: bird.category,
+          taxonOrder: bird.taxonOrder,
+        };
+      })
       .sort((a, b) => a.commonName.localeCompare(b.commonName));
 
     // Cache the results

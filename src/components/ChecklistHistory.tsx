@@ -3,6 +3,7 @@
  */
 
 import type { BirdList } from '../types';
+import { exportToEBirdCSV, validateChecklistForExport } from '../services/csvExport';
 import './ChecklistHistory.css';
 
 interface ChecklistHistoryProps {
@@ -27,8 +28,31 @@ export function ChecklistHistory({ lists }: ChecklistHistoryProps) {
     const year = d.getFullYear().toString().slice(-2);
     const hours = d.getHours();
     const minutes = d.getMinutes().toString().padStart(2, '0');
-    
+
     return `${day}/${month}/${year}, ${hours}:${minutes}`;
+  };
+
+  const handleDownload = (list: BirdList) => {
+    // Validate the checklist before export
+    const validationError = validateChecklistForExport(list);
+
+    if (validationError) {
+      // Show warning but allow download anyway (user might fix in eBird)
+      const proceed = window.confirm(
+        `${validationError}\n\nDo you want to download anyway?`
+      );
+      if (!proceed) {
+        return;
+      }
+    }
+
+    // Export the checklist
+    try {
+      exportToEBirdCSV(list);
+    } catch (error) {
+      console.error('Error exporting checklist:', error);
+      alert('Failed to export checklist. Please try again.');
+    }
   };
 
   return (
@@ -59,10 +83,7 @@ export function ChecklistHistory({ lists }: ChecklistHistoryProps) {
                     <button
                       className="btn-icon btn-icon--download"
                       title="Download checklist"
-                      onClick={() => {
-                        // TODO: Implement download functionality
-                        console.log('Download checklist:', list.id);
-                      }}
+                      onClick={() => handleDownload(list)}
                     >
                       ⬇️
                     </button>

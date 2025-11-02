@@ -12,12 +12,18 @@ export interface BirdSighting {
   commonName: string;
   /** Scientific name of the bird species (optional) */
   scientificName?: string;
+  /** Genus name (first part of scientific name) */
+  genus?: string;
+  /** Species name (second part of scientific name) */
+  species?: string;
   /** eBird species code (4-6 letter code) */
   speciesCode?: string;
   /** Number of individuals observed */
   count: number;
   /** When the sighting was recorded */
   timestamp: Date;
+  /** Optional comments for this specific sighting */
+  comments?: string;
 }
 
 /**
@@ -26,8 +32,12 @@ export interface BirdSighting {
 export interface BirdReference {
   /** Common name of the species */
   commonName: string;
-  /** Scientific name of the species */
+  /** Scientific name of the species (full) */
   scientificName: string;
+  /** Genus name (first part of scientific name) */
+  genus?: string;
+  /** Species name (second part of scientific name) */
+  species?: string;
   /** eBird species code */
   speciesCode: string;
   /** Taxonomic category */
@@ -79,6 +89,14 @@ export interface BirdList {
   distanceKm?: number;
   /** Whether all species observed were reported */
   allObsReported: boolean;
+  /** State/Province code (e.g., 'VIC' for Victoria) */
+  stateProvince?: string;
+  /** County/Region name */
+  county?: string;
+  /** Number of observers on the checklist */
+  numberOfObservers?: number;
+  /** Area covered in acres (for Area protocol) */
+  areaAcres?: number;
 }
 
 /**
@@ -131,20 +149,29 @@ export interface VoiceInference {
 }
 
 /**
- * CSV export format for eBird checklist
+ * CSV export format for eBird Record Format
+ * Based on official eBird import specification
  */
 export interface EBirdCSVRow {
   'Common Name': string;
-  'Species Code': string;
-  'Count': string;
+  'Genus': string;
+  'Species': string;
+  'Number': string;
+  'Species Comments': string;
   'Location Name': string;
+  'Latitude': string;
+  'Longitude': string;
   'Date': string; // MM/DD/YYYY
   'Time': string; // HH:MM AM/PM
+  'State/Province': string;
+  'County': string;
   'Protocol': string;
-  'Duration (Min)': string;
+  'Number of Observers': string;
+  'Duration': string; // Minutes
   'All Obs Reported': 'Y' | 'N';
-  'Distance Traveled (km)': string;
-  'Comments': string;
+  'Effort Distance Miles': string;
+  'Effort Area Acres': string;
+  'Submission Comments': string;
 }
 
 /**
