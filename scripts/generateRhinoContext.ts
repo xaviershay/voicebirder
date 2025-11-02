@@ -14,7 +14,7 @@ interface BirdReference {
 }
 
 interface BirdNameMapping {
-  rhinoName: string;
+  rhinoNames: string[];
   ebirdCommonName: string;
   scientificName: string;
   speciesCode: string;
@@ -23,10 +23,79 @@ interface BirdNameMapping {
 const EBIRD_API_BASE = 'https://api.ebird.org/v2';
 
 /**
+ * Map of specific word replacements for phonetic spelling
+ */
+const WORD_REPLACEMENTS: Record<string, string> = {
+  "Horsfield's": "Horse field's",
+  "Fiordland": "Fiord land",
+  "Weebill": "Wee bill",
+  "Nativehen": "Native hen",
+  "Buttonquail": "Button quail",
+  "Bassian": "Bass Ian",
+  "Baillon's": "Bail on's",
+  "Cisticola": "Cyst e cola",
+  "Salvin's": "Sell vin's",
+  "Myzomela": "My zo mela",
+  "Sahul": "Sa Hool",
+  "Treecreeper": "Tree creeper",
+  "Shrikethrush": "Shrike thrush",
+  "Guineafowl": "Guinea fowl",
+  "Lewin's": "Lou Inn's",
+  "Nanday": "Nan day",
+  "Pycroft's": "Pie croft's",
+  "Radjah": "Rad jar",
+  "Needletail": "Needle tail",
+};
+
+/**
+ * Suffixes that should be split from compound words
+ */
+const WORD_SUFFIXES_TO_SPLIT = ['wren', 'lark', 'bird', 'fowl'];
+
+/**
+ * Prefixes that should be split from compound words
+ */
+const WORD_PREFIXES_TO_SPLIT = ['Cuckoo'];
+
+/**
  * Convert eBird name to Rhino-compatible name
  */
 function toRhinoName(ebirdName: string): string {
-  return ebirdName.replace(/-/g, ' ');
+  let name = ebirdName.replace(/-/g, ' ');
+  
+  // Apply specific word replacements
+  for (const [original, replacement] of Object.entries(WORD_REPLACEMENTS)) {
+    const regex = new RegExp(`\\b${original}\\b`, 'g');
+    name = name.replace(regex, replacement);
+  }
+  
+  // Split single words ending in specific suffixes
+  for (const suffix of WORD_SUFFIXES_TO_SPLIT) {
+    const regex = new RegExp(`\\b(\\w+${suffix})\\b`, 'gi');
+    name = name.replace(regex, (match) => {
+      // Only split if it's a single word (no spaces)
+      if (!match.includes(' ')) {
+        const suffixRegex = new RegExp(`${suffix}$`, 'i');
+        return match.replace(suffixRegex, ` ${suffix}`);
+      }
+      return match;
+    });
+  }
+  
+  // Split single words starting with specific prefixes
+  for (const prefix of WORD_PREFIXES_TO_SPLIT) {
+    const regex = new RegExp(`\\b(${prefix}\\w+)\\b`, 'g');
+    name = name.replace(regex, (match) => {
+      // Only split if it's a single word (no spaces)
+      if (!match.includes(' ')) {
+        const prefixRegex = new RegExp(`^${prefix}`, 'i');
+        return match.replace(prefixRegex, `${prefix} `);
+      }
+      return match;
+    });
+  }
+  
+  return name;
 }
 
 /**
@@ -99,31 +168,101 @@ async function fetchMelbourneBirds(apiKey: string): Promise<BirdReference[]> {
  * Generate mapping from bird references
  */
 function generateMapping(birds: BirdReference[]): BirdNameMapping[] {
-  return birds.map(bird => ({
-    rhinoName: toRhinoName(bird.commonName),
+  const possiblyRedundantWords = ['Australian', 'Australasian', 'Eurasian', 'European'];
+  
+  // First pass: generate base rhino names
+  const baseMapping = birds.map(bird => ({
+    baseRhinoName: toRhinoName(bird.commonName),
     ebirdCommonName: bird.commonName,
     scientificName: bird.scientificName,
     speciesCode: bird.speciesCode,
   }));
+  
+  // For each possibly redundant word, check if we can create alternative names
+  const alternativeNames = new Map<string, Set<string>>();
+  
+  for (const word of possiblyRedundantWords) {
+    // Find all birds that start with this word
+    const birdsWithWord = baseMapping.filter(b => 
+      b.baseRhinoName.startsWith(word + ' ')
+    );
+    
+    if (birdsWithWord.length === 0) continue;
+    
+    // Create alternative names by removing the prefix
+    const alternatives = birdsWithWord.map(b => ({
+      original: b.baseRhinoName,
+      alternative: b.baseRhinoName.substring(word.length + 1), // +1 for the space
+      speciesCode: b.speciesCode,
+    }));
+    
+    // Check if all alternatives are unique (no collisions)
+    const alternativeSet = new Set(alternatives.map(a => a.alternative.toLowerCase()));
+    const allOriginalNames = new Set(baseMapping.map(b => b.baseRhinoName.toLowerCase()));
+    
+    // Check for collisions with existing bird names
+    let hasCollision = false;
+    for (const alt of alternatives) {
+      const altLower = alt.alternative.toLowerCase();
+      // Check if alternative collides with any existing bird name
+      if (allOriginalNames.has(altLower)) {
+        hasCollision = true;
+        break;
+      }
+    }
+    
+    // Only add alternatives if they're unique and don't collide
+    if (alternativeSet.size === alternatives.length && !hasCollision) {
+      for (const alt of alternatives) {
+        if (!alternativeNames.has(alt.speciesCode)) {
+          alternativeNames.set(alt.speciesCode, new Set());
+        }
+        alternativeNames.get(alt.speciesCode)!.add(alt.alternative);
+      }
+    }
+  }
+  
+  // Final mapping with all rhino names (base + alternatives)
+  return baseMapping.map(bird => {
+    const rhinoNames = [bird.baseRhinoName];
+    const alternatives = alternativeNames.get(bird.speciesCode);
+    if (alternatives) {
+      rhinoNames.push(...Array.from(alternatives));
+    }
+    
+    return {
+      rhinoNames,
+      ebirdCommonName: bird.ebirdCommonName,
+      scientificName: bird.scientificName,
+      speciesCode: bird.speciesCode,
+    };
+  });
 }
 
 /**
  * Generate Rhino YAML
  */
 function generateRhinoYAML(mapping: BirdNameMapping[]): string {
-  const sortedBirds = [...mapping].sort((a, b) =>
-    a.rhinoName.localeCompare(b.rhinoName)
+  // Collect all unique rhino names with their associated bird data
+  const allRhinoNames: string[] = [];
+  
+  for (const bird of mapping) {
+    allRhinoNames.push(...bird.rhinoNames);
+  }
+  
+  // Sort all rhino names alphabetically
+  const sortedNames = [...new Set(allRhinoNames)].sort((a, b) => 
+    a.localeCompare(b)
   );
 
-  const birdNamesList = sortedBirds
-    .map(m => `      - ${m.rhinoName}`)
+  const birdNamesList = sortedNames
+    .map(name => `      - ${name}`)
     .join('\n');
 
   return `context:
   expressions:
     addBird:
       - "[$pv.TwoDigitInteger:count] $birdName:birdName"
-      - "$birdName:birdName [$pv.TwoDigitInteger:count]"
   slots:
     birdName:
 ${birdNamesList}

@@ -17,7 +17,7 @@ context:
       - Atlantic Yellow nosed Albatross
       - Australasian Bittern
       - Australasian Darter
-      - Australasian Figbird
+      - Australasian Fig bird
       - Australasian Gannet
       - Australasian Grass Owl
       - Australasian Grebe
@@ -45,18 +45,22 @@ context:
       - Australian Spectacled Monarch
       - Australian Tern
       - Azure Kingfisher
+      - Bail on's Crake
       - Baird's Sandpiper
       - Banded Lapwing
       - Banded Stilt
       - Bar shouldered Dove
       - Bar tailed Godwit
       - Barking Owl
+      - Bass Ian Thrush
       - Beach Thick knee
       - Beautiful Firetail
       - Bell Miner
+      - Bittern
       - Black backed Bittern
       - Black bellied Plover
       - Black bellied Storm Petrel
+      - Black bird
       - Black Bittern
       - Black breasted Kite
       - Black browed Albatross
@@ -64,7 +68,7 @@ context:
       - Black eared Cuckoo
       - Black eared Miner
       - Black faced Cormorant
-      - Black faced Cuckoo Shrike
+      - Black faced Cuckoo shrike
       - Black faced Monarch
       - Black faced Woodswallow
       - Black Falcon
@@ -85,6 +89,7 @@ context:
       - Blue faced Honeyeater
       - Blue Petrel
       - Blue winged Parrot
+      - Boobook
       - Bridled Tern
       - Broad billed Prion
       - Broad billed Sandpiper
@@ -110,6 +115,7 @@ context:
       - Buller's Albatross
       - Buller's Shearwater
       - Bush Thick knee
+      - Bustard
       - California Quail
       - Canada Goose
       - Cape Barren Goose
@@ -135,36 +141,39 @@ context:
       - Common Sandpiper
       - Common Tern
       - Cook's Petrel
+      - Coot
       - Cotton Pygmy Goose
+      - Crake
       - Crescent Honeyeater
-      - Crested Bellbird
+      - Crested Bell bird
       - Crested Pigeon
       - Crimson Chat
       - Crimson Rosella
       - Curlew Sandpiper
+      - Darter
       - Diamond Dove
       - Diamond Firetail
-      - Dollarbird
+      - Dollar bird
       - Double banded Plover
       - Double barred Finch
       - Dusky Moorhen
       - Dusky Woodswallow
       - Eastern Barn Owl
-      - Eastern Bristlebird
+      - Eastern Bristle bird
       - Eastern Cattle Egret
       - Eastern Rosella
       - Eastern Shrike tit
       - Eastern Spinebill
-      - Eastern Whipbird
+      - Eastern Whip bird
       - Eastern Yellow Robin
       - Eastern Yellow Wagtail
       - Elegant Parrot
       - Emu
       - Erect crested Penguin
-      - Eurasian Blackbird
+      - Eurasian Black bird
       - Eurasian Coot
       - Eurasian Hobby
-      - Eurasian Skylark
+      - Eurasian Sky lark
       - Eurasian Tree Sparrow
       - Eurasian Whimbrel
       - European Goldfinch
@@ -172,10 +181,12 @@ context:
       - European Starling
       - Fairy Martin
       - Fairy Prion
+      - Fairy Tern
       - Fan tailed Cuckoo
       - Far Eastern Curlew
+      - Fig bird
       - Fiord land Penguin
-      - Fischer's Lovebird
+      - Fischer's Love bird
       - Flame Robin
       - Flesh footed Shearwater
       - Fluttering Shearwater
@@ -186,14 +197,18 @@ context:
       - Fuscous Honeyeater
       - Galah
       - Gang gang Cockatoo
+      - Gannet
       - Gilbert's Whistler
       - Glossy Black Cockatoo
       - Glossy Ibis
+      - Golden headed Cyst e cola
       - Golden Pheasant
       - Golden Whistler
+      - Goldfinch
       - Gould's Petrel
+      - Grass Owl
       - Gray backed Storm Petrel
-      - Gray Butcherbird
+      - Gray Butcher bird
       - Gray crowned Babbler
       - Gray Currawong
       - Gray faced Petrel
@@ -218,13 +233,16 @@ context:
       - Great winged Petrel
       - Greater Bluebonnet
       - Greater Sand Plover
+      - Grebe
       - Green Pheasant
-      - Ground Cuckoo Shrike
+      - Greenfinch
+      - Ground Cuckoo shrike
       - Ground Parrot
       - Gull billed Tern
       - Hardhead
       - Helmeted Guinea fowl
       - Hoary headed Grebe
+      - Hobby
       - Hooded Plover
       - Hooded Robin
       - Horse field's Bronze Cuckoo
@@ -233,7 +251,8 @@ context:
       - Hudsonian Godwit
       - Hudsonian Whimbrel
       - Hutton's Shearwater
-      - Indian Peafowl
+      - Ibis
+      - Indian Pea fowl
       - Indian Yellow nosed Albatross
       - Inland Dotterel
       - Inland Thornbill
@@ -242,6 +261,7 @@ context:
       - Java Sparrow
       - Kelp Gull
       - Kerguelen Petrel
+      - King Parrot
       - Large billed Scrub wren
       - Latham's Snipe
       - Laughing Kookaburra
@@ -249,8 +269,6 @@ context:
       - Leaden Flycatcher
       - Lesser Yellowlegs
       - Letter winged Kite
-      - Lou inn's Honeyeater
-      - Lou inn's Rail
       - Light mantled Albatross
       - Little Black Cormorant
       - Little Button quail
@@ -259,8 +277,8 @@ context:
       - Little Curlew
       - Little Eagle
       - Little Egret
-      - Little Friarbird
-      - Little Grassbird
+      - Little Friar bird
+      - Little Grass bird
       - Little Heron
       - Little Lorikeet
       - Little Penguin
@@ -270,12 +288,15 @@ context:
       - Little Shearwater
       - Little Stint
       - Little Tern
-      - Little Wattlebird
+      - Little Wattle bird
       - Long billed Corella
       - Long billed Dowitcher
       - Long tailed Jaeger
       - Long toed Stint
+      - Lou Inn's Honeyeater
+      - Lou Inn's Rail
       - Macaroni Penguin
+      - Magpie
       - Magpie Goose
       - Magpie lark
       - Mallard
@@ -285,6 +306,7 @@ context:
       - Maned Duck
       - Marsh Sandpiper
       - Masked Lapwing
+      - Masked Owl
       - Masked Woodswallow
       - Mistletoe bird
       - Mottled Petrel
@@ -297,7 +319,7 @@ context:
       - Nankeen Night Heron
       - New Holland Honeyeater
       - New Zealand Storm Petrel
-      - Noisy Friarbird
+      - Noisy Friar bird
       - Noisy Miner
       - Northern Giant Petrel
       - Northern Royal Albatross
@@ -310,6 +332,7 @@ context:
       - Oriental Plover
       - Oriental Pratincole
       - Osprey
+      - Owlet nightjar
       - Pacific Black Duck
       - Pacific Emerald Dove
       - Pacific Golden Plover
@@ -321,6 +344,7 @@ context:
       - Painted Button quail
       - Painted Firetail
       - Painted Honeyeater
+      - Painted Snipe
       - Pale headed Rosella
       - Pallid Cuckoo
       - Papuan Eclectus
@@ -328,8 +352,10 @@ context:
       - Parkinson's Petrel
       - Peaceful Dove
       - Pectoral Sandpiper
+      - Pelican
       - Peregrine Falcon
-      - Pied Butcherbird
+      - Pie croft's Petrel
+      - Pied Butcher bird
       - Pied Cormorant
       - Pied Currawong
       - Pied Heron
@@ -341,21 +367,23 @@ context:
       - Pink eared Duck
       - Pink Robin
       - Pintado Petrel
+      - Pipit
       - Plains wanderer
       - Plum headed Finch
       - Plumed Egret
       - Plumed Whistling Duck
       - Pomarine Jaeger
       - Powerful Owl
+      - Pratincole
       - Princess Parrot
       - Providence Petrel
       - Purple backed Fairy wren
       - Purple crowned Lorikeet
       - Purple gaped Honeyeater
-      - Pie Croft's Petrel
-      - Rad jar Shell duck
+      - Rad jar Shelduck
       - Rainbow Bee eater
       - Rainbow Lorikeet
+      - Raven
       - Red backed Kingfisher
       - Red browed Firetail
       - Red browed Tree creeper
@@ -373,46 +401,57 @@ context:
       - Red necked Stint
       - Red rumped Parrot
       - Red tailed Black Cockatoo
-      - Red Wattlebird
+      - Red Wattle bird
       - Red whiskered Bulbul
       - Red winged Parrot
       - Redthroat
-      - Regent Bowerbird
+      - Reed Warbler
+      - Regent Bower bird
       - Regent Honeyeater
       - Regent Parrot
       - Restless Flycatcher
       - Ring necked Pheasant
+      - Ringneck
       - Rock Pigeon
       - Rose crowned Fruit Dove
       - Rose ringed Parakeet
       - Rose Robin
-      - Rosy faced Lovebird
+      - Rosy faced Love bird
       - Royal Penguin
       - Royal Spoonbill
       - Ruddy Turnstone
       - Ruff
-      - Rufous Bristlebird
+      - Rufous Bristle bird
+      - Rufous Fantail
       - Rufous Field wren
       - Rufous Song lark
       - Rufous Whistler
+      - Sa Hool Brush Cuckoo
+      - Sa Hool Cicada bird
       - Sacred Kingfisher
       - Sanderling
-      - Satin Bowerbird
+      - Satin Bower bird
       - Satin Flycatcher
       - Scaly breasted Lorikeet
       - Scarlet chested Parrot
       - Scarlet Macaw
+      - Scarlet My zo mela
       - Scarlet Robin
+      - Sell vin's Albatross
+      - Sell vin's Prion
       - Semipalmated Plover
       - Sharp tailed Sandpiper
+      - Shelduck
       - Shining Bronze Cuckoo
       - Short tailed Shearwater
+      - Shoveler
       - Shy Heath wren
       - Siberian Sand Plover
       - Silver Gull
       - Silvereye
       - Singing Bush lark
       - Singing Honeyeater
+      - Sky lark
       - Slaty headed Parakeet
       - Slender billed Prion
       - Slender billed Thornbill
@@ -434,6 +473,7 @@ context:
       - Southern Whiteface
       - Spangled Drongo
       - Speckled Warbler
+      - Spectacled Monarch
       - Spiny cheeked Honeyeater
       - Splendid Fairy wren
       - Spotless Crake
@@ -445,6 +485,7 @@ context:
       - Spotted Redshank
       - Square tailed Kite
       - Star Finch
+      - Starling
       - Stilt Sandpiper
       - Straw necked Ibis
       - Streaked Shearwater
@@ -458,18 +499,21 @@ context:
       - Sulphur crested Cockatoo
       - Sun Parakeet
       - Superb Fairy wren
-      - Superb Lyrebird
+      - Superb Lyre bird
       - Superb Parrot
       - Swamp Harrier
+      - Swamphen
       - Swan Goose
       - Swift Parrot
       - Tasmanian Boobook
       - Tawny crowned Honeyeater
       - Tawny Frogmouth
-      - Tawny Grassbird
+      - Tawny Grass bird
       - Terek Sandpiper
+      - Tern
       - Topknot Pigeon
       - Tree Martin
+      - Tree Sparrow
       - Tufted Duck
       - Turquoise Parrot
       - Varied Sittella
@@ -482,10 +526,11 @@ context:
       - Western Gerygone
       - Western Rosella
       - Westland Petrel
+      - Whimbrel
       - Whiskered Tern
       - Whistling Kite
       - White backed Swallow
-      - White bellied Cuckoo Shrike
+      - White bellied Cuckoo shrike
       - White bellied Sea Eagle
       - White breasted Woodswallow
       - White browed Babbler
@@ -508,7 +553,7 @@ context:
       - White necked Petrel
       - White plumed Honeyeater
       - White rumped Sandpiper
-      - White tailed Tropicbird
+      - White tailed Tropic bird
       - White throated Gerygone
       - White throated Needle tail
       - White throated Nightjar
@@ -525,7 +570,7 @@ context:
       - Wonga Pigeon
       - Wood Sandpiper
       - Yellow billed Spoonbill
-      - Yellow collared Lovebird
+      - Yellow collared Love bird
       - Yellow faced Honeyeater
       - Yellow plumed Honeyeater
       - Yellow rumped Thornbill

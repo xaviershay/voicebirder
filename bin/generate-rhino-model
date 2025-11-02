@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Generate Rhino context YAML and bird name mapping from eBird API
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+npx tsx scripts/generateRhinoContext.ts

@@ -15,7 +15,7 @@ export function toRhinoName(ebirdName: string): string {
  * Mapping entry structure
  */
 export interface BirdNameMapping {
-  rhinoName: string;
+  rhinoNames: string[];
   ebirdCommonName: string;
   scientificName: string;
   speciesCode: string;
@@ -26,7 +26,7 @@ export interface BirdNameMapping {
  */
 export function generateMapping(birds: BirdReference[]): BirdNameMapping[] {
   return birds.map(bird => ({
-    rhinoName: toRhinoName(bird.commonName),
+    rhinoNames: [toRhinoName(bird.commonName)],
     ebirdCommonName: bird.commonName,
     scientificName: bird.scientificName,
     speciesCode: bird.speciesCode,
@@ -41,19 +41,29 @@ export function findBirdByRhinoName(
   rhinoName: string
 ): BirdNameMapping | undefined {
   const normalized = rhinoName.toLowerCase().trim();
-  return mapping.find(m => m.rhinoName.toLowerCase() === normalized);
+  return mapping.find(m => 
+    m.rhinoNames.some(name => name.toLowerCase() === normalized)
+  );
 }
 
 /**
  * Generate Rhino YAML content from mapping
  */
 export function generateRhinoYAML(mapping: BirdNameMapping[]): string {
-  const sortedBirds = [...mapping].sort((a, b) =>
-    a.rhinoName.localeCompare(b.rhinoName)
+  // Collect all unique rhino names
+  const allRhinoNames: string[] = [];
+  
+  for (const bird of mapping) {
+    allRhinoNames.push(...bird.rhinoNames);
+  }
+  
+  // Sort all rhino names alphabetically
+  const sortedNames = [...new Set(allRhinoNames)].sort((a, b) =>
+    a.localeCompare(b)
   );
 
-  const birdNamesList = sortedBirds
-    .map(m => `      - ${m.rhinoName}`)
+  const birdNamesList = sortedNames
+    .map(name => `      - ${name}`)
     .join('\n');
 
   return `context:
