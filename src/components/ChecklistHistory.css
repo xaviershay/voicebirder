@@ -1,0 +1,165 @@
+.checklist-history {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.checklist-history--empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+}
+
+.checklist-history__empty-message {
+  color: #6b7280;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.checklist-history__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+
+.checklist-history__table-container {
+  overflow-x: auto;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.checklist-history__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.checklist-history__table thead {
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.checklist-history__table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.checklist-history__table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  color: #111827;
+}
+
+.checklist-history__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.checklist-history__table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.table-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.table-center {
+  text-align: center;
+}
+
+.table-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.btn-icon:hover {
+  transform: scale(1.1);
+}
+
+.btn-icon--download:hover {
+  background: #dbeafe;
+}
+
+@media (max-width: 768px) {
+  .checklist-history {
+    padding: 0.5rem;
+  }
+
+  .checklist-history__title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .checklist-history__table th,
+  .checklist-history__table td {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .checklist-history__table th {
+    font-size: 0.75rem;
+  }
+
+  .btn-icon {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .checklist-history__empty-message {
+    color: #9ca3af;
+  }
+
+  .checklist-history__title {
+    color: #f9fafb;
+  }
+
+  .checklist-history__table-container {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .checklist-history__table thead {
+    background: #111827;
+    border-bottom-color: #374151;
+  }
+
+  .checklist-history__table th {
+    color: #e5e7eb;
+  }
+
+  .checklist-history__table td {
+    color: #f9fafb;
+    border-bottom-color: #374151;
+  }
+
+  .checklist-history__table tbody tr:hover {
+    background: #374151;
+  }
+
+  .btn-icon--download:hover {
+    background: #1e3a8a;
+  }
+}

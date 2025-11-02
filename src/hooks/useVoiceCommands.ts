@@ -154,8 +154,6 @@ export function useVoiceCommands(
     if (inference !== null) {
       clearListeningTimeout();
       setVoiceState('WAITING_FOR_WAKEWORD');
-      console.log(inference);
-      console.log("blah");
       if (inference.isUnderstood && inference.intent === 'addBird') {
         const rhinoBirdName = inference.slots?.birdName;
         const count = inference.slots?.count ? parseInt(inference.slots.count, 10) : 1;

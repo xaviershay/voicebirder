@@ -12,7 +12,7 @@ import { VoiceControls } from './components/VoiceControls';
 import { useBirdList } from './hooks/useBirdList';
 import { useVoiceCommands, type VoiceInference } from './hooks/useVoiceCommands';
 import { getBirdSpecies } from './services/ebirdApi';
-import { getEBirdApiKey } from './services/storage';
+import { getEBirdApiKey, getHistoricalLists } from './services/storage';
 import type { Location, Protocol, BirdReference } from './types';
 import type { BirdNameMapping } from './utils/birdNameMapping';
 import './App.css';
@@ -35,6 +35,7 @@ function App() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isLoadingBirds, setIsLoadingBirds] = useState(false);
   const [birdDataError, setBirdDataError] = useState<string | null>(null);
+  const [historicalLists, setHistoricalLists] = useState(getHistoricalLists());
 
   // Voice command callback
   const handleBirdDetected = useCallback(
@@ -118,6 +119,8 @@ function App() {
   const handleCompleteList = () => {
     if (window.confirm('Complete this checklist? You can export it later.')) {
       completeList();
+      // Refresh historical lists after completing
+      setHistoricalLists(getHistoricalLists());
     }
   };
 
@@ -168,7 +171,10 @@ function App() {
         )}
 
         {!currentList ? (
-          <WelcomeScreen onStartList={handleStartList} />
+          <WelcomeScreen 
+            onStartList={handleStartList} 
+            historicalLists={historicalLists}
+          />
         ) : (
           <ActiveListView
             list={currentList}

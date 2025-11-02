@@ -3,15 +3,21 @@
  */
 
 import { useState } from 'react';
-import type { Location, Protocol } from '../types';
+import type { Location, Protocol, BirdList } from '../types';
+import { ChecklistHistory } from './ChecklistHistory';
 import './WelcomeScreen.css';
 
 interface WelcomeScreenProps {
   onStartList: (location: Location, protocol: Protocol) => void;
   defaultLocation?: string;
+  historicalLists?: BirdList[];
 }
 
-export function WelcomeScreen({ onStartList, defaultLocation = 'Melbourne, Victoria' }: WelcomeScreenProps) {
+export function WelcomeScreen({ 
+  onStartList, 
+  defaultLocation = 'Melbourne, Victoria',
+  historicalLists = [],
+}: WelcomeScreenProps) {
   const [locationName, setLocationName] = useState(defaultLocation);
   const [protocol, setProtocol] = useState<Protocol>('Stationary');
 
@@ -75,11 +81,17 @@ export function WelcomeScreen({ onStartList, defaultLocation = 'Melbourne, Victo
           <h3 className="info__title">How it works</h3>
           <ol className="info__list">
             <li>Start a new checklist</li>
-            <li>Add birds manually or use voice commands (coming soon)</li>
+            <li>Add birds manually or use voice commands</li>
             <li>Complete your list and export to eBird</li>
           </ol>
         </div>
       </div>
+
+      {historicalLists.length > 0 && (
+        <div className="welcome__history">
+          <ChecklistHistory lists={historicalLists} />
+        </div>
+      )}
     </div>
   );
 }
