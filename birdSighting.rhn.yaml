@@ -1,0 +1,536 @@
+context:
+  expressions:
+    addBird:
+      - "[$pv.TwoDigitInteger:count] $birdName:birdName"
+  slots:
+    birdName:
+      - African Collared Dove
+      - Alexandrine Parakeet
+      - American Golden Plover
+      - Antarctic Prion
+      - Antarctic Tern
+      - Antipodean Albatross
+      - Apostle bird
+      - Arctic Tern
+      - Asian Dowitcher
+      - Atlantic Petrel
+      - Atlantic Yellow nosed Albatross
+      - Australasian Bittern
+      - Australasian Darter
+      - Australasian Figbird
+      - Australasian Gannet
+      - Australasian Grass Owl
+      - Australasian Grebe
+      - Australasian Shoveler
+      - Australasian Swamphen
+      - Australian Boobook
+      - Australian Bustard
+      - Australian Crake
+      - Australian Fairy Tern
+      - Australian Hobby
+      - Australian Ibis
+      - Australian King Parrot
+      - Australian Magpie
+      - Australian Masked Owl
+      - Australian Owlet nightjar
+      - Australian Painted Snipe
+      - Australian Pelican
+      - Australian Pipit
+      - Australian Pratincole
+      - Australian Raven
+      - Australian Reed Warbler
+      - Australian Ringneck
+      - Australian Rufous Fantail
+      - Australian Shelduck
+      - Australian Spectacled Monarch
+      - Australian Tern
+      - Azure Kingfisher
+      - Baird's Sandpiper
+      - Banded Lapwing
+      - Banded Stilt
+      - Bar shouldered Dove
+      - Bar tailed Godwit
+      - Barking Owl
+      - Beach Thick knee
+      - Beautiful Firetail
+      - Bell Miner
+      - Black backed Bittern
+      - Black bellied Plover
+      - Black bellied Storm Petrel
+      - Black Bittern
+      - Black breasted Kite
+      - Black browed Albatross
+      - Black chinned Honeyeater
+      - Black eared Cuckoo
+      - Black eared Miner
+      - Black faced Cormorant
+      - Black faced Cuckoo Shrike
+      - Black faced Monarch
+      - Black faced Woodswallow
+      - Black Falcon
+      - Black fronted Dotterel
+      - Black Honeyeater
+      - Black Kite
+      - Black Noddy
+      - Black shouldered Kite
+      - Black Swan
+      - Black tailed Godwit
+      - Black tailed Gull
+      - Black tailed Native hen
+      - Black Tern
+      - Blue and yellow Macaw
+      - Blue billed Duck
+      - Blue billed White Tern
+      - Blue breasted Quail
+      - Blue faced Honeyeater
+      - Blue Petrel
+      - Blue winged Parrot
+      - Bridled Tern
+      - Broad billed Prion
+      - Broad billed Sandpiper
+      - Brolga
+      - Brown Booby
+      - Brown Cuckoo Dove
+      - Brown Falcon
+      - Brown Gerygone
+      - Brown Goshawk
+      - Brown headed Honeyeater
+      - Brown Honeyeater
+      - Brown Noddy
+      - Brown Quail
+      - Brown Skua
+      - Brown Song lark
+      - Brown Thornbill
+      - Brown Tree creeper
+      - Brush Bronzewing
+      - Budgerigar
+      - Buff banded Rail
+      - Buff breasted Sandpiper
+      - Buff rumped Thornbill
+      - Buller's Albatross
+      - Buller's Shearwater
+      - Bush Thick knee
+      - California Quail
+      - Canada Goose
+      - Cape Barren Goose
+      - Cape Gannet
+      - Caspian Tern
+      - Channel billed Cuckoo
+      - Chestnut breasted Munia
+      - Chestnut crowned Babbler
+      - Chestnut Quail thrush
+      - Chestnut rumped Heath wren
+      - Chestnut rumped Thornbill
+      - Chestnut Teal
+      - Chukar
+      - Cockatiel
+      - Collared Sparrowhawk
+      - Common Bronzewing
+      - Common Diving Petrel
+      - Common Greenshank
+      - Common Myna
+      - Common Ostrich
+      - Common Redshank
+      - Common Ringed Plover
+      - Common Sandpiper
+      - Common Tern
+      - Cook's Petrel
+      - Cotton Pygmy Goose
+      - Crescent Honeyeater
+      - Crested Bellbird
+      - Crested Pigeon
+      - Crimson Chat
+      - Crimson Rosella
+      - Curlew Sandpiper
+      - Diamond Dove
+      - Diamond Firetail
+      - Dollarbird
+      - Double banded Plover
+      - Double barred Finch
+      - Dusky Moorhen
+      - Dusky Woodswallow
+      - Eastern Barn Owl
+      - Eastern Bristlebird
+      - Eastern Cattle Egret
+      - Eastern Rosella
+      - Eastern Shrike tit
+      - Eastern Spinebill
+      - Eastern Whipbird
+      - Eastern Yellow Robin
+      - Eastern Yellow Wagtail
+      - Elegant Parrot
+      - Emu
+      - Erect crested Penguin
+      - Eurasian Blackbird
+      - Eurasian Coot
+      - Eurasian Hobby
+      - Eurasian Skylark
+      - Eurasian Tree Sparrow
+      - Eurasian Whimbrel
+      - European Goldfinch
+      - European Greenfinch
+      - European Starling
+      - Fairy Martin
+      - Fairy Prion
+      - Fan tailed Cuckoo
+      - Far Eastern Curlew
+      - Fiord land Penguin
+      - Fischer's Lovebird
+      - Flame Robin
+      - Flesh footed Shearwater
+      - Fluttering Shearwater
+      - Forest Kingfisher
+      - Forest Raven
+      - Franklin's Gull
+      - Freckled Duck
+      - Fuscous Honeyeater
+      - Galah
+      - Gang gang Cockatoo
+      - Gilbert's Whistler
+      - Glossy Black Cockatoo
+      - Glossy Ibis
+      - Golden Pheasant
+      - Golden Whistler
+      - Gould's Petrel
+      - Gray backed Storm Petrel
+      - Gray Butcherbird
+      - Gray crowned Babbler
+      - Gray Currawong
+      - Gray faced Petrel
+      - Gray Falcon
+      - Gray Fantail
+      - Gray fronted Honeyeater
+      - Gray Goshawk
+      - Gray headed Albatross
+      - Gray Noddy
+      - Gray Petrel
+      - Gray Shrike thrush
+      - Gray tailed Tattler
+      - Gray Teal
+      - Graylag Goose
+      - Great Cormorant
+      - Great Crested Grebe
+      - Great Crested Tern
+      - Great Egret
+      - Great Frigate bird
+      - Great Knot
+      - Great Shearwater
+      - Great winged Petrel
+      - Greater Bluebonnet
+      - Greater Sand Plover
+      - Green Pheasant
+      - Ground Cuckoo Shrike
+      - Ground Parrot
+      - Gull billed Tern
+      - Hardhead
+      - Helmeted Guinea fowl
+      - Hoary headed Grebe
+      - Hooded Plover
+      - Hooded Robin
+      - Horse field's Bronze Cuckoo
+      - House Crow
+      - House Sparrow
+      - Hudsonian Godwit
+      - Hudsonian Whimbrel
+      - Hutton's Shearwater
+      - Indian Peafowl
+      - Indian Yellow nosed Albatross
+      - Inland Dotterel
+      - Inland Thornbill
+      - Island Canary
+      - Jacky winter
+      - Java Sparrow
+      - Kelp Gull
+      - Kerguelen Petrel
+      - Large billed Scrub wren
+      - Latham's Snipe
+      - Laughing Kookaburra
+      - Leach's Storm Petrel
+      - Leaden Flycatcher
+      - Lesser Yellowlegs
+      - Letter winged Kite
+      - Lou inn's Honeyeater
+      - Lou inn's Rail
+      - Light mantled Albatross
+      - Little Black Cormorant
+      - Little Button quail
+      - Little Corella
+      - Little Crow
+      - Little Curlew
+      - Little Eagle
+      - Little Egret
+      - Little Friarbird
+      - Little Grassbird
+      - Little Heron
+      - Little Lorikeet
+      - Little Penguin
+      - Little Pied Cormorant
+      - Little Raven
+      - Little Ringed Plover
+      - Little Shearwater
+      - Little Stint
+      - Little Tern
+      - Little Wattlebird
+      - Long billed Corella
+      - Long billed Dowitcher
+      - Long tailed Jaeger
+      - Long toed Stint
+      - Macaroni Penguin
+      - Magpie Goose
+      - Magpie lark
+      - Mallard
+      - Mallee Emu wren
+      - Mallee fowl
+      - Mandarin Duck
+      - Maned Duck
+      - Marsh Sandpiper
+      - Masked Lapwing
+      - Masked Woodswallow
+      - Mistletoe bird
+      - Mottled Petrel
+      - Mulga Parrot
+      - Muscovy Duck
+      - Musk Duck
+      - Musk Lorikeet
+      - Nan day Parakeet
+      - Nankeen Kestrel
+      - Nankeen Night Heron
+      - New Holland Honeyeater
+      - New Zealand Storm Petrel
+      - Noisy Friarbird
+      - Noisy Miner
+      - Northern Giant Petrel
+      - Northern Royal Albatross
+      - Northern Shoveler
+      - Olive backed Oriole
+      - Olive Whistler
+      - Orange bellied Parrot
+      - Orange Chat
+      - Oriental Magpie
+      - Oriental Plover
+      - Oriental Pratincole
+      - Osprey
+      - Pacific Black Duck
+      - Pacific Emerald Dove
+      - Pacific Golden Plover
+      - Pacific Gull
+      - Pacific Heron
+      - Pacific Koel
+      - Pacific Reef Heron
+      - Pacific Swift
+      - Painted Button quail
+      - Painted Firetail
+      - Painted Honeyeater
+      - Pale headed Rosella
+      - Pallid Cuckoo
+      - Papuan Eclectus
+      - Parasitic Jaeger
+      - Parkinson's Petrel
+      - Peaceful Dove
+      - Pectoral Sandpiper
+      - Peregrine Falcon
+      - Pied Butcherbird
+      - Pied Cormorant
+      - Pied Currawong
+      - Pied Heron
+      - Pied Honeyeater
+      - Pied Oystercatcher
+      - Pied Stilt
+      - Pilot bird
+      - Pink Cockatoo
+      - Pink eared Duck
+      - Pink Robin
+      - Pintado Petrel
+      - Plains wanderer
+      - Plum headed Finch
+      - Plumed Egret
+      - Plumed Whistling Duck
+      - Pomarine Jaeger
+      - Powerful Owl
+      - Princess Parrot
+      - Providence Petrel
+      - Purple backed Fairy wren
+      - Purple crowned Lorikeet
+      - Purple gaped Honeyeater
+      - Pie Croft's Petrel
+      - Rad jar Shell duck
+      - Rainbow Bee eater
+      - Rainbow Lorikeet
+      - Red backed Kingfisher
+      - Red browed Firetail
+      - Red browed Tree creeper
+      - Red capped Plover
+      - Red capped Robin
+      - Red chested Button quail
+      - Red crowned Parakeet
+      - Red footed Booby
+      - Red Jungle fowl
+      - Red kneed Dotterel
+      - Red Knot
+      - Red lored Whistler
+      - Red necked Avocet
+      - Red necked Phalarope
+      - Red necked Stint
+      - Red rumped Parrot
+      - Red tailed Black Cockatoo
+      - Red Wattlebird
+      - Red whiskered Bulbul
+      - Red winged Parrot
+      - Redthroat
+      - Regent Bowerbird
+      - Regent Honeyeater
+      - Regent Parrot
+      - Restless Flycatcher
+      - Ring necked Pheasant
+      - Rock Pigeon
+      - Rose crowned Fruit Dove
+      - Rose ringed Parakeet
+      - Rose Robin
+      - Rosy faced Lovebird
+      - Royal Penguin
+      - Royal Spoonbill
+      - Ruddy Turnstone
+      - Ruff
+      - Rufous Bristlebird
+      - Rufous Field wren
+      - Rufous Song lark
+      - Rufous Whistler
+      - Sacred Kingfisher
+      - Sanderling
+      - Satin Bowerbird
+      - Satin Flycatcher
+      - Scaly breasted Lorikeet
+      - Scarlet chested Parrot
+      - Scarlet Macaw
+      - Scarlet Robin
+      - Semipalmated Plover
+      - Sharp tailed Sandpiper
+      - Shining Bronze Cuckoo
+      - Short tailed Shearwater
+      - Shy Heath wren
+      - Siberian Sand Plover
+      - Silver Gull
+      - Silvereye
+      - Singing Bush lark
+      - Singing Honeyeater
+      - Slaty headed Parakeet
+      - Slender billed Prion
+      - Slender billed Thornbill
+      - Snares Penguin
+      - Snowy Albatross
+      - Soft plumaged Petrel
+      - Song Thrush
+      - Sooty Albatross
+      - Sooty Owl
+      - Sooty Oystercatcher
+      - Sooty Shearwater
+      - South Island Oystercatcher
+      - South Polar Skua
+      - Southern Emu wren
+      - Southern Fulmar
+      - Southern Giant Petrel
+      - Southern Royal Albatross
+      - Southern Scrub Robin
+      - Southern Whiteface
+      - Spangled Drongo
+      - Speckled Warbler
+      - Spiny cheeked Honeyeater
+      - Splendid Fairy wren
+      - Spotless Crake
+      - Spotted Dove
+      - Spotted Harrier
+      - Spotted Nightjar
+      - Spotted Pardalote
+      - Spotted Quail thrush
+      - Spotted Redshank
+      - Square tailed Kite
+      - Star Finch
+      - Stilt Sandpiper
+      - Straw necked Ibis
+      - Streaked Shearwater
+      - Striated Field wren
+      - Striated Grass wren
+      - Striated Pardalote
+      - Striated Thornbill
+      - Striped Honeyeater
+      - Stubble Quail
+      - Subantarctic Shearwater
+      - Sulphur crested Cockatoo
+      - Sun Parakeet
+      - Superb Fairy wren
+      - Superb Lyrebird
+      - Superb Parrot
+      - Swamp Harrier
+      - Swan Goose
+      - Swift Parrot
+      - Tasmanian Boobook
+      - Tawny crowned Honeyeater
+      - Tawny Frogmouth
+      - Tawny Grassbird
+      - Terek Sandpiper
+      - Topknot Pigeon
+      - Tree Martin
+      - Tufted Duck
+      - Turquoise Parrot
+      - Varied Sittella
+      - Wandering Tattler
+      - Wandering Whistling Duck
+      - Wedge tailed Eagle
+      - Wedge tailed Shearwater
+      - Wee bill
+      - Welcome Swallow
+      - Western Gerygone
+      - Western Rosella
+      - Westland Petrel
+      - Whiskered Tern
+      - Whistling Kite
+      - White backed Swallow
+      - White bellied Cuckoo Shrike
+      - White bellied Sea Eagle
+      - White breasted Woodswallow
+      - White browed Babbler
+      - White browed Scrub wren
+      - White browed Tree creeper
+      - White browed Woodswallow
+      - White capped Albatross
+      - White cheeked Honeyeater
+      - White chinned Petrel
+      - White eared Honeyeater
+      - White eared Monarch
+      - White faced Heron
+      - White faced Storm Petrel
+      - White fronted Chat
+      - White fronted Honeyeater
+      - White fronted Tern
+      - White headed Petrel
+      - White headed Pigeon
+      - White naped Honeyeater
+      - White necked Petrel
+      - White plumed Honeyeater
+      - White rumped Sandpiper
+      - White tailed Tropicbird
+      - White throated Gerygone
+      - White throated Needle tail
+      - White throated Nightjar
+      - White throated Tree creeper
+      - White Wagtail
+      - White winged Chough
+      - White winged Fairy wren
+      - White winged Tern
+      - White winged Triller
+      - Wild Turkey
+      - Willie wagtail
+      - Wilson's Phalarope
+      - Wilson's Storm Petrel
+      - Wonga Pigeon
+      - Wood Sandpiper
+      - Yellow billed Spoonbill
+      - Yellow collared Lovebird
+      - Yellow faced Honeyeater
+      - Yellow plumed Honeyeater
+      - Yellow rumped Thornbill
+      - Yellow tailed Black Cockatoo
+      - Yellow Thornbill
+      - Yellow throated Miner
+      - Yellow tufted Honeyeater
+      - Zebra Finch
