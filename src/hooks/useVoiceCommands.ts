@@ -40,7 +40,6 @@ export function useVoiceCommands(
   const [accessKey, setAccessKey] = useState<string>('');
 
   // Refs to track IDs and prevent duplicate processing
-  const lastWakeWordIdRef = useRef<string | null>(null);
   const listeningTimeoutRef = useRef<number | null>(null);
 
   // Load access key
@@ -81,158 +80,6 @@ export function useVoiceCommands(
     }
   }, []);
 
-  // Reset to waiting for wake word state
-  const resetToWaitingForWakeWord = useCallback(() => {
-    console.log('[Voice] Resetting to WAITING_FOR_WAKEWORD state');
-    clearListeningTimeout();
-    setVoiceState('WAITING_FOR_WAKEWORD');
-
-    // Start Porcupine if not already listening
-    //if (isPorcupineLoaded && !isPorcupineListening) {
-    //  console.log('[Porcupine] Starting...');
-    //  startPorcupine();
-    //}
-  }, [isPorcupineLoaded, isPorcupineListening, startPorcupine, clearListeningTimeout]);
-
-
-  // Handle wake word detection
-  useEffect(() => {
-    if (wakeWordDetection !== null && wakeWordDetection.label === 'Record') {
-      console.log("[Porcupine] Wake word detected!");
-      setVoiceState('LISTENING_FOR_INTENT');
-      processRhino();
-
-      clearListeningTimeout();
-      listeningTimeoutRef.current = setTimeout(() => {
-        console.log('[Rhino] Timeout - no intent detected');
-        setLastInference({ isUnderstood: false });
-        resetToWaitingForWakeWord();
-      }, 5000);
-      /*
-      // Ignore wake words when in IDLE state
-      if (voiceState === 'IDLE') {
-        return;
-      }
-
-      const wakeWordId = JSON.stringify(wakeWordDetection);
-
-      // Skip if we've already processed this exact wake word
-      if (lastWakeWordIdRef.current === wakeWordId) {
-        return;
-      }
-
-      console.log('[Porcupine] Wake word detected!');
-      lastWakeWordIdRef.current = wakeWordId;
-
-      if (voiceState === 'WAITING_FOR_WAKEWORD') {
-        // Normal flow: start Rhino
-        startRhinoListening();
-      } else if (voiceState === 'LISTENING_FOR_INTENT') {
-        // Wake word during Rhino: reset Rhino (stop and restart)
-        console.log('[Voice] Wake word detected while listening - resetting Rhino');
-        startRhinoListening();
-      }
-        */
-    }
-  }, [wakeWordDetection]);
-
-  useEffect(() => {
-    if (inference !== null) {
-      clearListeningTimeout();
-      setVoiceState('WAITING_FOR_WAKEWORD');
-      console.log(inference);
-      if (inference.isUnderstood && inference.intent === 'addBird') {
-        const rhinoBirdName = inference.slots?.birdName;
-        const count = inference.slots?.count ? parseInt(inference.slots.count, 10) : 1;
-
-        if (rhinoBirdName) {
-          // Map Rhino name back to eBird data
-          const birdData = findBirdByRhinoName(birdMapping, rhinoBirdName);
-
-          const voiceInference: VoiceInference = {
-            isUnderstood: true,
-            birdName: rhinoBirdName,
-            count: isNaN(count) ? 1 : count,
-            ebirdCommonName: birdData?.ebirdCommonName,
-            scientificName: birdData?.scientificName,
-            speciesCode: birdData?.speciesCode,
-          };
-
-          // Notify callback exactly once
-          if (onBirdDetected) {
-            onBirdDetected(voiceInference);
-          }
-        }
-      } else {
-        //setLastInference({ isUnderstood: false });
-      }
-    }
-  }, [inference]);
-  /*
-  // Handle Rhino inference
-  useEffect(() => {
-    if (inference !== null && voiceState === 'LISTENING_FOR_INTENT') {
-      const inferenceId = JSON.stringify(inference);
-
-      // Skip if we've already processed this exact inference
-      if (lastInferenceIdRef.current === inferenceId) {
-        return;
-      }
-
-      console.log('[Rhino] Inference received:', inference);
-      lastInferenceIdRef.current = inferenceId;
-      clearListeningTimeout();
-
-      if (inference.isUnderstood && inference.intent === 'addBird') {
-        const rhinoBirdName = inference.slots?.birdName;
-        const count = inference.slots?.count ? parseInt(inference.slots.count, 10) : 1;
-
-        if (rhinoBirdName) {
-          // Map Rhino name back to eBird data
-          const birdData = findBirdByRhinoName(birdMapping, rhinoBirdName);
-
-          const voiceInference: VoiceInference = {
-            isUnderstood: true,
-            birdName: rhinoBirdName,
-            count: isNaN(count) ? 1 : count,
-            ebirdCommonName: birdData?.ebirdCommonName,
-            scientificName: birdData?.scientificName,
-            speciesCode: birdData?.speciesCode,
-          };
-
-          console.log('[Voice] Processing bird:', voiceInference);
-          setLastInference(voiceInference);
-
-          // Notify callback exactly once
-          if (onBirdDetected) {
-            onBirdDetected(voiceInference);
-          }
-        }
-      } else {
-        setLastInference({ isUnderstood: false });
-      }
-
-      // Return to waiting for wake word
-      resetToWaitingForWakeWord();
-    }
-  }, [inference, voiceState, birdMapping, onBirdDetected, clearListeningTimeout, resetToWaitingForWakeWord]);
-*/
-
-  // Handle errors
-  useEffect(() => {
-    if (porcupineError) {
-      console.error('[Porcupine] Error:', porcupineError);
-      setError(`Wake word error: ${porcupineError}`);
-    }
-  }, [porcupineError]);
-
-  useEffect(() => {
-    if (rhinoError) {
-      console.error('[Rhino] Error:', rhinoError);
-      setError(`Speech recognition error: ${rhinoError}`);
-    }
-  }, [rhinoError]);
-
   // Start voice commands
   const startVoiceCommands = useCallback(async () => {
     if (!accessKey) {
@@ -245,7 +92,6 @@ export function useVoiceCommands(
 
       // Reset all speech-related state
       setError(null);
-      lastWakeWordIdRef.current = null;
       clearListeningTimeout();
 
       // Initialize Porcupine (wake word)
@@ -275,13 +121,95 @@ export function useVoiceCommands(
     }
   }, [accessKey, initPorcupine, initRhino, startPorcupine, clearListeningTimeout, isRhinoLoaded]);
 
-  // Stop voice commands
+  // Reset to waiting for wake word state
+  const resetToWaitingForWakeWord = useCallback(() => {
+    console.log('[Voice] Resetting to WAITING_FOR_WAKEWORD state');
+    clearListeningTimeout();
+    setVoiceState('WAITING_FOR_WAKEWORD');
+
+    // Start Porcupine if not already listening
+    //if (isPorcupineLoaded && !isPorcupineListening) {
+    //  console.log('[Porcupine] Starting...');
+    //  startPorcupine();
+    //}
+  }, [isPorcupineLoaded, isPorcupineListening, startPorcupine, clearListeningTimeout]);
+
+
+  // Handle wake word detection
+  useEffect(() => {
+    if (wakeWordDetection !== null && wakeWordDetection.label === 'Record') {
+      console.log("[Porcupine] Wake word detected!");
+      setVoiceState('LISTENING_FOR_INTENT');
+      processRhino();
+
+      clearListeningTimeout();
+      listeningTimeoutRef.current = setTimeout(() => {
+        console.log('[Rhino] Timeout - no intent detected');
+        resetToWaitingForWakeWord();
+      }, 5000);
+    }
+  }, [wakeWordDetection]);
+
+  useEffect(() => {
+    if (inference !== null) {
+      clearListeningTimeout();
+      setVoiceState('WAITING_FOR_WAKEWORD');
+      console.log(inference);
+      console.log("blah");
+      if (inference.isUnderstood && inference.intent === 'addBird') {
+        const rhinoBirdName = inference.slots?.birdName;
+        const count = inference.slots?.count ? parseInt(inference.slots.count, 10) : 1;
+
+        if (rhinoBirdName) {
+          // Map Rhino name back to eBird data
+          const birdData = findBirdByRhinoName(birdMapping, rhinoBirdName);
+
+          if (birdData) {
+
+            const voiceInference: VoiceInference = {
+              isUnderstood: true,
+              birdName: rhinoBirdName,
+              count: isNaN(count) ? 1 : count,
+              ebirdCommonName: birdData?.ebirdCommonName,
+              scientificName: birdData?.scientificName,
+              speciesCode: birdData?.speciesCode,
+            };
+
+            // Notify callback exactly once
+            if (onBirdDetected) {
+              onBirdDetected(voiceInference);
+            }
+          } else {
+            console.log("Unknown bird: ", rhinoBirdName);
+          }
+        } else {
+          console.log("No birdname in slot - should never happen");
+        }
+      } else {
+        console.log("not understood or not addBird");
+      }
+    }
+  }, [inference]);
+
+  // Handle errors
+  useEffect(() => {
+    if (porcupineError) {
+      console.error('[Porcupine] Error:', porcupineError);
+      setError(`Wake word error: ${porcupineError}`);
+    }
+  }, [porcupineError]);
+
+  useEffect(() => {
+    if (rhinoError) {
+      console.error('[Rhino] Error:', rhinoError);
+      setError(`Speech recognition error: ${rhinoError}`);
+    }
+  }, [rhinoError]);
+
   const stopVoiceCommands = useCallback(() => {
     console.log('[Voice] Stopping voice commands...');
 
-    // Reset all speech-related state
     clearListeningTimeout();
-    lastWakeWordIdRef.current = null;
 
     // Stop and release both engines
     if (isPorcupineListening) {

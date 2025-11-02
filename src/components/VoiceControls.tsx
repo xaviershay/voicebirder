@@ -2,13 +2,11 @@
  * Voice controls component for starting/stopping voice commands
  */
 
-import type { VoiceInference } from '../hooks/useVoiceCommands';
 import './VoiceControls.css';
 
 interface VoiceControlsProps {
   isWakeWordActive: boolean;
   isListeningForCommand: boolean;
-  lastInference: VoiceInference | null;
   onStart: () => void;
   onStop: () => void;
 }
@@ -16,7 +14,6 @@ interface VoiceControlsProps {
 export function VoiceControls({
   isWakeWordActive,
   isListeningForCommand,
-  lastInference,
   onStart,
   onStop,
 }: VoiceControlsProps) {
@@ -51,27 +48,6 @@ export function VoiceControls({
         </div>
       )}
 
-      {lastInference && (
-        <div className="voice-controls__inference">
-          {lastInference.isUnderstood ? (
-            <div className="inference inference--success">
-              <span className="inference__icon">✓</span>
-              <div className="inference__text">
-                <strong>{lastInference.ebirdCommonName || lastInference.birdName}</strong>
-                {lastInference.count && lastInference.count > 1 && (
-                  <span className="inference__count"> × {lastInference.count}</span>
-                )}
-              </div>
-            </div>
-          ) : (
-            <div className="inference inference--error">
-              <span className="inference__icon">✗</span>
-              <span>Could not understand command</span>
-            </div>
-          )}
-        </div>
-      )}
-
       {!isWakeWordActive && (
         <div className="voice-controls__help">
           <p className="help-text">
@@ -80,8 +56,7 @@ export function VoiceControls({
           <ol className="help-list">
             <li>Click "Start Voice Commands"</li>
             <li>Say "Record" to activate</li>
-            <li>Say the bird name and optional count</li>
-            <li>Examples: "Record Australian Magpie", "Record 3 Rainbow Lorikeet"</li>
+            <li>Say the bird name and optional count: "Record 3 Australian Magpie"</li>
           </ol>
         </div>
       )}

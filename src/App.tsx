@@ -58,7 +58,6 @@ function App() {
   const {
     isWakeWordActive,
     isListeningForCommand,
-    lastInference,
     error: voiceError,
     startVoiceCommands,
     stopVoiceCommands,
@@ -179,7 +178,6 @@ function App() {
             <VoiceControls
               isWakeWordActive={isWakeWordActive}
               isListeningForCommand={isListeningForCommand}
-              lastInference={lastInference}
               onStart={startVoiceCommands}
               onStop={stopVoiceCommands}
             />
