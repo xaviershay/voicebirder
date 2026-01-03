@@ -2,6 +2,8 @@
 
 A proof-of-concept mobile-first web application for recording bird sightings using voice commands. Built with React, TypeScript, and Picovoice voice processing.
 
+![Screenshot](https://raw.githubusercontent.com/xaviershay/voicebirder/refs/heads/main/voicebirder-screenshot.jpg)
+
 While the core birding loop works well, it's not going to work because:
 
 * Need to be able to maintain microphone recording even when phone is locked, which doesn't appear to be possible.
